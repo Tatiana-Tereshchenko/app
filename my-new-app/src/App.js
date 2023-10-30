@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import CustomLoader from "./components/CustomLoader/CustomLoader";
 import {Tab} from "./components/Tab";
 import tabsData from "./Tabs.json";
@@ -15,7 +15,9 @@ const App = () => {
       }, 2000); 
     }, []);
   
-  return appLoading ? ( <CustomLoader />) : (
+  return appLoading ? (
+    <CustomLoader />
+  ) : (
     <Container>
       <ItemBox>
         {tabsData.map((tab) => (
@@ -25,15 +27,16 @@ const App = () => {
         ))}
       </ItemBox>
       <Routes>
+        <Route path="/" element={<Navigate to="/dummyTable" />} />
         <Route
-          path=""
-          element={<Tab tabs={tabsData} tabId={tabsData[0].id} />}
+          path="/dummyTable"
+          element={<Tab tabs={tabsData} tabId="dummyTable" />}
         />
         {tabsData.map((tab) => (
-        <Route
-          key={tab.id}
-          path={`/${tab.id}`}
-          element={<Tab tabId={tab.id} tabs={tabsData} />}
+          <Route
+            key={tab.id}
+            path={`/${tab.id}`}
+            element={<Tab tabId={tab.id} tabs={tabsData} />}
           />
         ))}
       </Routes>
