@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkmy_new_app=self.webpackChunkmy_new_app||[]).push([[0],[function(n,e,t){t.r(e),t.d(e,{default:function(){return p}});t(791);var r,u=t(168),c=t(867).ZP.p(r||(r=(0,u.Z)(["\n  text-align: center\n"]))),i=t(184),p=function(){return(0,i.jsx)("div",{children:(0,i.jsx)(c,{children:"MY CHARTS"})})}}]]);
+//# sourceMappingURL=0.746294e9.chunk.js.map
