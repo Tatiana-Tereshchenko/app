@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
+import CustomLoader from "./components/CustomLoader/CustomLoader";
+import {Tab} from "./components/Tab";
+import tabsData from "./Tabs.json";
+import { Container, ItemBox, Tittle } from "./App.styled";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edi <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+const App = () => {
+  const [appLoading, setAppLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setAppLoading(false);
+      }, 2000); 
+    }, []);
+  
+  return appLoading ? ( <CustomLoader />) : (
+    <Container>
+      <ItemBox>
+        {tabsData.map((tab) => (
+          <li key={tab.id}>
+            <Tittle to={`/${tab.id}`}>{tab.title}</Tittle>
+          </li>
+        ))}
+      </ItemBox>
+      <Routes>
+        <Route
+          path=""
+          element={<Tab tabs={tabsData} tabId={tabsData[0].id} />}
+        />
+        {tabsData.map((tab) => (
+        <Route
+          key={tab.id}
+          path={`/${tab.id}`}
+          element={<Tab tabId={tab.id} tabs={tabsData} />}
+          />
+        ))}
+      </Routes>
+    </Container>
   );
-}
+};
 
 export default App;
+
+
